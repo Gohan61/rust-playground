@@ -36,3 +36,17 @@ Either run:
 - cargo run --release --bin rust-brown-book-8-3-excercise/pig_latin/employee_sort (release version)
 
 </details>
+<details>
+<summary>Minigrep</summary>
+
+A CLI program that serves as a basic grep alternative. Visit chapter [here](https://rust-book.cs.brown.edu/ch12-00-an-io-project.html)
+
+### Run minigrep
+
+#### Case-insensitive (true) / Case-sensitive (false) as last argument
+
+-- cargo run -- \*word_to_match\* \*file_to_search\* true
+
+#### Or provide an environment variable for case insensitive
+
+IGNORE_CASE=1 cargo run -- \*word_to_match\* \*file_to_search\*
