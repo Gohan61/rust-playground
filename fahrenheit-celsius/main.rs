@@ -1,3 +1,4 @@
+use core::f64;
 use std::io;
 use std::num::ParseIntError;
 use std::str::FromStr;
@@ -20,8 +21,6 @@ impl FromStr for Options {
 }
 
 fn main() {
-    let mut degree_input = String::new();
-
     let convert_option = loop {
         println!("Press 1: convert to Celsius");
         println!("Press 2: convert to Fahrenheit");
@@ -41,12 +40,23 @@ fn main() {
         };
     };
 
-    println!("Enter the degrees in Celsius/Fahrenheit");
-    io::stdin()
-        .read_line(&mut degree_input)
-        .expect("No valid input");
+    let degree_input = loop {
+        println!("Enter the degrees in Celsius/Fahrenheit");
 
-    let degree_input: f64 = degree_input.trim().parse().expect("Error");
+        let mut degree_input = String::new();
+
+        io::stdin()
+            .read_line(&mut degree_input)
+            .expect("No valid input");
+
+        match degree_input.trim().parse::<f64>() {
+            Ok(num) => break num,
+            Err(_) => {
+                println!("Please enter a valid number");
+                continue;
+            }
+        }
+    };
 
     match convert_option {
         Options::One => println!("{}", to_celsius(degree_input)),
