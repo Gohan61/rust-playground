@@ -59,8 +59,8 @@ fn main() {
     };
 
     match convert_option {
-        Options::One => println!("{}", to_celsius(degree_input)),
-        Options::Two => println!("{}", to_fahrenheit(degree_input)),
+        Options::One => println!("\n{:.1} Celsius", to_celsius(degree_input)),
+        Options::Two => println!("\n{:.1} Fahrenheit", to_fahrenheit(degree_input)),
     }
 }
 
