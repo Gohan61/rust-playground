@@ -34,7 +34,7 @@ fn main() {
         match convert_option.trim().parse::<Options>() {
             Ok(option) => break option,
             Err(_) => {
-                println!("Please enter a valid option");
+                println!("\nPlease enter a valid option");
                 continue;
             }
         };
