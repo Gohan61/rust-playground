@@ -41,7 +41,10 @@ fn main() {
     };
 
     let degree_input = loop {
-        println!("Enter the degrees in Celsius/Fahrenheit");
+        match convert_option {
+            Options::One => println!("\nEnter the degrees in Fahrenheit"),
+            Options::Two => println!("\nEnter the degrees in Celsius"),
+        }
 
         let mut degree_input = String::new();
 
