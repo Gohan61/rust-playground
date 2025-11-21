@@ -6,6 +6,7 @@ fn main() {
         (String::from("Hans"), "sales"),
         (String::from("Peter"), "hr"),
         (String::from("Melissa"), "marketing"),
+        (String::from("Samantha"), "hr"),
     ]);
     let department_options: [&str; 3] = ["sales", "marketing", "hr"];
 
@@ -28,11 +29,37 @@ fn main() {
 
     department_map
         .entry(employee_name)
-        .or_insert(department_options[department_selection]);
-
-    // println!("{:?}", department_map);
+        .insert_entry(department_options[department_selection]);
 
     let list_option: u8 = get_list_option();
+
+    match list_option {
+        1 => {
+            let department_selection = get_department_input(&mut department_input);
+            print_people_in_department(&department_map, department_options[department_selection])
+        }
+        2 => print_all_people_in_company(&department_map),
+        _ => (),
+    }
+}
+
+fn print_all_people_in_company(department_map: &HashMap<String, &str>) -> () {
+    print!("\n");
+    let mut people_list: Vec<_> = department_map
+        .iter()
+        .map(|(k, v)| (k.as_str(), *v))
+        .collect();
+
+    people_list.sort_by(|(k1, _), (k2, _)| k1.cmp(k2));
+    println!("{:?}", people_list);
+}
+
+fn print_people_in_department(department_map: &HashMap<String, &str>, department: &str) -> () {
+    print!("\n");
+    department_map
+        .iter()
+        .filter(|(_, v)| **v == department)
+        .for_each(|(k, v)| println!("{}: {}", k, v));
 }
 
 fn get_list_option() -> u8 {
@@ -63,7 +90,10 @@ fn get_list_option() -> u8 {
 fn get_department_input(department_input: &mut String) -> usize {
     loop {
         department_input.clear();
-        println!("Please select a department");
+        println!("\nPlease select a department");
+        println!("Press 1: 'sales'");
+        println!("Press 2: 'marketing'");
+        println!("Press 3: 'hr'");
 
         io::stdin()
             .read_line(department_input)
