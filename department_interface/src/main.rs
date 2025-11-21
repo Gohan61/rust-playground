@@ -41,7 +41,7 @@ fn main() {
 }
 
 fn print_all_people_in_company(department_map: &HashMap<String, &str>) {
-    print!("\n");
+    println!();
     let mut people_list: Vec<_> = department_map
         .iter()
         .map(|(k, v)| (k.as_str(), *v))
@@ -52,7 +52,7 @@ fn print_all_people_in_company(department_map: &HashMap<String, &str>) {
 }
 
 fn print_people_in_department(department_map: &HashMap<String, &str>, department: &str) {
-    print!("\n");
+    println!();
     department_map
         .iter()
         .filter(|(_, v)| **v == department)
