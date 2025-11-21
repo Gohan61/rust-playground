@@ -13,17 +13,14 @@ fn main() {
     let mut employee_name = String::new();
     let mut department_input = String::new();
 
-    loop {
-        employee_name.clear();
-        println!("Please enter the employee name");
+    employee_name.clear();
+    println!("Please enter the employee name");
 
-        io::stdin()
-            .read_line(&mut employee_name)
-            .expect("Failed to read line");
+    io::stdin()
+        .read_line(&mut employee_name)
+        .expect("Failed to read line");
 
-        employee_name = employee_name.trim().to_string();
-        break;
-    }
+    employee_name = employee_name.trim().to_string();
 
     let department_selection: usize = get_department_input(&mut department_input);
 
@@ -43,7 +40,7 @@ fn main() {
     }
 }
 
-fn print_all_people_in_company(department_map: &HashMap<String, &str>) -> () {
+fn print_all_people_in_company(department_map: &HashMap<String, &str>) {
     print!("\n");
     let mut people_list: Vec<_> = department_map
         .iter()
@@ -54,7 +51,7 @@ fn print_all_people_in_company(department_map: &HashMap<String, &str>) -> () {
     println!("{:?}", people_list);
 }
 
-fn print_people_in_department(department_map: &HashMap<String, &str>, department: &str) -> () {
+fn print_people_in_department(department_map: &HashMap<String, &str>, department: &str) {
     print!("\n");
     department_map
         .iter()
