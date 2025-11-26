@@ -3,6 +3,7 @@ use std::io;
 use std::num::ParseIntError;
 use std::str::FromStr;
 
+#[derive(PartialEq, Debug)]
 enum Options {
     One = 1,
     Two = 2,
@@ -73,4 +74,40 @@ fn to_celsius(temp: f64) -> f64 {
 
 fn to_fahrenheit(temp: f64) -> f64 {
     temp * 1.8 + 32.0
+}
+
+#[cfg(test)]
+mod tests {
+    use std::num::IntErrorKind;
+
+    use super::*;
+
+    #[test]
+    #[should_panic]
+    fn int_overlfow() {
+        "300".parse::<Options>().unwrap();
+    }
+
+    #[test]
+    fn not_valid_int() {
+        let result = "3".parse::<Options>().unwrap_err();
+
+        assert_eq!(result.kind(), &IntErrorKind::InvalidDigit);
+    }
+
+    #[test]
+    fn not_valid_char() {
+        let result = "a".parse::<Options>().unwrap_err();
+
+        assert_eq!(result.kind(), &IntErrorKind::InvalidDigit);
+    }
+
+    #[test]
+    fn valid() {
+        let option_1 = "1".parse::<Options>().unwrap();
+        assert_eq!(option_1, Options::One);
+
+        let option_2 = "2".parse::<Options>().unwrap();
+        assert_eq!(option_2, Options::Two);
+    }
 }
